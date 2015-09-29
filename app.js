@@ -1,13 +1,11 @@
 'use strict';
 let fs = require('fs');
-let stream = require('stream');
-let CombinedStream = require('combined-stream2');
-let sourcemap = require('source-map');
 let Concat = require('concat-with-sourcemaps')
+
 let route = require('koa-route');
 let serve = require('koa-static');
-
 let koa = require('koa');
+
 let app = koa();
 
 let sources = fs.readdirSync('./src')
@@ -45,5 +43,3 @@ function concatSources(withSourcemap) {
 
   return concat;
 }
-
-
