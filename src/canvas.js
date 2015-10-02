@@ -24,7 +24,8 @@ function Canvas(elementId, width, height) {
   }
 
   function clear(maskImage) {
-    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#86acbb';
+    ctx.fillRect(0, 0, width, height);
     ctx.globalAlpha = 0.03;
     ctx.drawImage(maskImage, 0, 0);
     ctx.globalAlpha = 1.0;
