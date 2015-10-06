@@ -30,6 +30,10 @@ function Keyboard() {
 
   return {
     isPressed: isPressed, 
-    setRead: setRead
+    setRead: setRead,
+
+    KEY_LEFT: 37,
+    KEY_RIGHT: 39,
+    KEY_RETURN: 13
   };
 }

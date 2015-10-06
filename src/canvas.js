@@ -3,6 +3,7 @@ function Canvas(elementId, width, height) {
 
   var canvasEl = document.getElementById(elementId);
   var ctx = canvasEl.getContext('2d');
+  var maskImage;
 
   function setCanvasHdpi() {
     var ratio = (window.devicePixelRatio || 1) / (ctx.backingStorePixelRatio ||
@@ -23,7 +24,9 @@ function Canvas(elementId, width, height) {
     ctx.scale(scaleFactor, scaleFactor);
   }
 
-  function clear(maskImage) {
+  function clear() {
+    if (!maskImage) return;
+
     ctx.fillStyle = '#86acbb';
     ctx.fillRect(0, 0, width, height);
     ctx.globalAlpha = 0.03;
@@ -31,7 +34,9 @@ function Canvas(elementId, width, height) {
     ctx.globalAlpha = 1.0;
   }
 
-  function drawSprites(maskImage, sprites) {
+  function drawSprites(sprites) {
+    if (!maskImage) return;
+
     sprites.forEach(function (sprite) {
       var x = sprite[0];
       var y = sprite[1];
@@ -43,10 +48,15 @@ function Canvas(elementId, width, height) {
     });
   }
 
+  function setMask(image) {
+    maskImage = image;
+  }
+
   setCanvasHdpi();
 
   return {
     clear: clear,
-    drawSprites: drawSprites
+    drawSprites: drawSprites,
+    setMask: setMask
   }
 }
