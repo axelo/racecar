@@ -1,6 +1,9 @@
 function ScenePlaying() {
   'use strict';
 
+  var inputLagFrameTime = 200;
+  var deltaInputLagFrameTime = 200;
+
   var minFrameTime = 400;
   var frameTime = 1000;
   var deltaTime = 0;
@@ -44,13 +47,20 @@ function ScenePlaying() {
   }
 
   function update(state, keyb, sprites, dt) {
-    if (keyb.isPressed(keyb.KEY_LEFT)) {
-      keyb.setRead(keyb.KEY_LEFT);
-      if (--state.player < 0) state.player = 0;
-    }
-    else if (keyb.isPressed(keyb.KEY_RIGHT)) {
-      keyb.setRead(keyb.KEY_RIGHT);
-      if (++state.player > 4) state.player = 4;
+
+    deltaInputLagFrameTime += dt;
+
+    if (deltaInputLagFrameTime >= inputLagFrameTime) {
+      deltaInputLagFrameTime = 0;
+
+      if (keyb.isPressed(keyb.KEY_LEFT)) {
+        keyb.setRead(keyb.KEY_LEFT);
+        if (--state.player < 0) state.player = 0;
+      }
+      else if (keyb.isPressed(keyb.KEY_RIGHT)) {
+        keyb.setRead(keyb.KEY_RIGHT);
+        if (++state.player > 4) state.player = 4;
+      }
     }
 
     deltaTime += dt;
