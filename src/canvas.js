@@ -3,7 +3,6 @@ function Canvas(elementId, width, height) {
 
   var canvasEl = document.getElementById(elementId);
   var ctx = canvasEl.getContext('2d');
-  var maskImage;
 
   function setCanvasHdpi() {
     var ratio = (window.devicePixelRatio || 1) / (ctx.backingStorePixelRatio ||
@@ -24,9 +23,7 @@ function Canvas(elementId, width, height) {
     ctx.scale(scaleFactor, scaleFactor);
   }
 
-  function clear() {
-    if (!maskImage) return;
-
+  function clear(maskImage) {
     ctx.fillStyle = '#86acbb';
     ctx.fillRect(0, 0, width, height);
     ctx.globalAlpha = 0.03;
@@ -34,29 +31,20 @@ function Canvas(elementId, width, height) {
     ctx.globalAlpha = 1.0;
   }
 
-  function drawSprites(sprites) {
-    if (!maskImage) return;
+  function drawSprite(maskImage, sprite) {
+    var x = sprite[0];
+    var y = sprite[1];
+    var w = sprite[2];
+    var h = sprite[3];
 
-    sprites.forEach(function (sprite) {
-      var x = sprite[0];
-      var y = sprite[1];
-      var w = sprite[2];
-      var h = sprite[3];
-
-      // image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      ctx.drawImage(maskImage, x, y, w, h, x, y, w, h);
-    });
-  }
-
-  function setMask(image) {
-    maskImage = image;
+    // image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    ctx.drawImage(maskImage, x, y, w, h, x, y, w, h);
   }
 
   setCanvasHdpi();
 
   return {
     clear: clear,
-    drawSprites: drawSprites,
-    setMask: setMask
+    drawSprite: drawSprite,
   }
 }

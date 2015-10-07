@@ -1,82 +1,252 @@
-function Sprites(canvas) {
+function Sprites() {
   'use strict';
 
-  function crash(tx) {
-    return [[tx+20, 193, 56, 16]];
-  }
-
-  function player(tx) {
-    return [[tx, 210, 64, 15]];
-  }
-
-  function opponent0(tx) {
-    return [[tx+140, 128, 8, 2]];
-  }
-
-  function opponent1(tx) {
-    return [[tx+120, 141, 16, 4]];
-  }
-
-  function opponent2(tx) {
-    return [[tx+80, 158, 32, 8]];
-  }
-  
-  function opponent3(tx) {
-    return [[tx+40, 182, 48, 11]];
-  }
-
-  function hit(tx) {
-    return [[tx+0, 34, 49, 20]];
-  }
-
-  function digit0to9(tx) {
-    return [
-      doDraw([[tx+234, 2, 12, 12], [tx+234, 16, 12, 12]]),
-      doDraw([[tx+244, 4, 2, 10], [tx+244, 16, 2, 10]]),
-      doDraw([[tx+235, 2, 10, 2], [tx+244, 4, 2, 10], [tx+235, 14, 10, 2], [tx+234, 16, 2, 10], [tx+235, 25, 10, 2]]),
-      doDraw([[tx+235, 2, 10, 2], [tx+244, 4, 2, 10], [tx+235, 14, 10, 2], [tx+244, 16, 2, 9], [tx+235, 25, 10, 2]]),
-      doDraw([[tx+234, 4, 2, 10], [tx+244, 4, 2, 10], [tx+235, 14, 10, 2], [tx+244, 16, 2, 9]]),
-      doDraw([[tx+235, 2, 10, 2], [tx+234, 4, 2, 10], [tx+235, 14, 10, 2], [tx+244, 16, 2, 9], [tx+235, 25, 10, 2]]),
-      doDraw([[tx+235, 2, 10, 2], [tx+234, 4, 2, 10], [tx+234, 14, 12, 13]]),
-      doDraw([[tx+235, 2, 10, 2], [tx+244, 4, 2, 10], [tx+244, 16, 2, 10]]),
-      doDraw([[tx+234, 2, 12, 25]]),
-      doDraw([[tx+234, 2, 12, 14], [tx+244, 16, 2, 10], [tx+235, 25, 10, 2]])
-    ];
-  }
-
-  function doDraw(sprites) {
-    return function () { return canvas.drawSprites(sprites); };
-  }
-
   function clear() {
-    canvas.clear();
+    enabledSprites.forEach(function (enabled, spriteIndex) {
+      enabledSprites[spriteIndex] = false;
+    });
   }
+
+  function addSprite(sprite) {
+    allSprites.push(sprite);
+    return allSprites.length - 1;
+  }
+
+  function enable(spriteIndices) {
+    return function () {
+      spriteIndices.forEach(function (spriteIndex) {
+        enabledSprites[spriteIndex] = true;
+      });
+    };
+  }
+
+  function byIndex(spriteIndex) {
+    return allSprites[spriteIndex];
+  }
+
+  var allSprites = [];
+  var enabledSprites = [];
+
+  var GAME_A = addSprite([0, 2, 60, 12]);
+  var GAME_B = addSprite([0, 2+12, 60, 12]);
+
+  var SEGMENT_0_0 = addSprite([235, 2, 10, 2]);
+  var SEGMENT_0_1 = addSprite([234, 4, 2, 10]);
+  var SEGMENT_0_2 = addSprite([244, 4, 2, 10]);
+  var SEGMENT_0_3 = addSprite([235, 14, 10, 2]);
+  var SEGMENT_0_4 = addSprite([234, 16, 2, 9]);
+  var SEGMENT_0_5 = addSprite([244, 16, 2, 9]);
+  var SEGMENT_0_6 = addSprite([235, 25, 10, 2]);
+
+  var SEGMENT_1_0 = addSprite([14+235, 2, 10, 2]);
+  var SEGMENT_1_1 = addSprite([14+234, 4, 2, 10]);
+  var SEGMENT_1_2 = addSprite([14+244, 4, 2, 10]);
+  var SEGMENT_1_3 = addSprite([14+235, 14, 10, 2]);
+  var SEGMENT_1_4 = addSprite([14+234, 16, 2, 9]);
+  var SEGMENT_1_5 = addSprite([14+244, 16, 2, 9]);
+  var SEGMENT_1_6 = addSprite([14+235, 25, 10, 2]);
+
+  var SEGMENT_2_0 = addSprite([36+235, 2, 10, 2]);
+  var SEGMENT_2_1 = addSprite([36+234, 4, 2, 10]);
+  var SEGMENT_2_2 = addSprite([36+244, 4, 2, 10]);
+  var SEGMENT_2_3 = addSprite([36+235, 14, 10, 2]);
+  var SEGMENT_2_4 = addSprite([36+234, 16, 2, 9]);
+  var SEGMENT_2_5 = addSprite([36+244, 16, 2, 9]);
+  var SEGMENT_2_6 = addSprite([36+235, 25, 10, 2]);
+
+  var SEGMENT_3_0 = addSprite([50+235, 2, 10, 2]);
+  var SEGMENT_3_1 = addSprite([50+234, 4, 2, 10]);
+  var SEGMENT_3_2 = addSprite([50+244, 4, 2, 10]);
+  var SEGMENT_3_3 = addSprite([50+235, 14, 10, 2]);
+  var SEGMENT_3_4 = addSprite([50+234, 16, 2, 9]);
+  var SEGMENT_3_5 = addSprite([50+244, 16, 2, 9]);
+  var SEGMENT_3_6 = addSprite([50+235, 25, 10, 2]);
+
+  var SEGMENT_4_0 = addSprite([64+235, 2, 10, 2]);
+  var SEGMENT_4_1 = addSprite([64+234, 4, 2, 10]);
+  var SEGMENT_4_2 = addSprite([64+244, 4, 2, 10]);
+  var SEGMENT_4_3 = addSprite([64+235, 14, 10, 2]);
+  var SEGMENT_4_4 = addSprite([64+234, 16, 2, 9]);
+  var SEGMENT_4_5 = addSprite([64+244, 16, 2, 9]);
+  var SEGMENT_4_6 = addSprite([64+235, 25, 10, 2]);
+
+  var COLON = addSprite([264, 8, 2, 14]);
+
+  var HIT_0 = addSprite([0*49, 34, 49, 20]);
+  var HIT_1 = addSprite([1*49, 34, 49, 20]);
+  var HIT_2 = addSprite([2*49, 34, 49, 20]);
+  var HIT_3 = addSprite([3*49, 34, 49, 20]);
+  var HIT_4 = addSprite([4*49, 34, 49, 20]);
+
+  var GAME_OVER = addSprite([129, 70, 61, 44]);
+
+  var OPPONENT_0_0 = addSprite([0*8+140, 128, 8, 2]);
+  var OPPONENT_0_1 = addSprite([1*8+140, 128, 8, 2]);
+  var OPPONENT_0_2 = addSprite([2*8+140, 128, 8, 2]);
+  var OPPONENT_0_3 = addSprite([3*8+140, 128, 8, 2]);
+  var OPPONENT_0_4 = addSprite([4*8+140, 128, 8, 2]);
+
+  var OPPONENT_1_0 = addSprite([0*16+120, 141, 16, 4]);
+  var OPPONENT_1_1 = addSprite([1*16+120, 141, 16, 4]);
+  var OPPONENT_1_2 = addSprite([2*16+120, 141, 16, 4]);
+  var OPPONENT_1_3 = addSprite([3*16+120, 141, 16, 4]);
+  var OPPONENT_1_4 = addSprite([4*16+120, 141, 16, 4]);
+
+  var OPPONENT_2_0 = addSprite([0*32+80, 158, 32, 8]);
+  var OPPONENT_2_1 = addSprite([1*32+80, 158, 32, 8]);
+  var OPPONENT_2_2 = addSprite([2*32+80, 158, 32, 8]);
+  var OPPONENT_2_3 = addSprite([3*32+80, 158, 32, 8]);
+  var OPPONENT_2_4 = addSprite([4*32+80, 158, 32, 8]);
+
+  var OPPONENT_3_0 = addSprite([0*48+40, 182, 48, 11]);
+  var OPPONENT_3_1 = addSprite([1*48+40, 182, 48, 11]);
+  var OPPONENT_3_2 = addSprite([2*48+40, 182, 48, 11]);
+  var OPPONENT_3_3 = addSprite([3*48+40, 182, 48, 11]);
+  var OPPONENT_3_4 = addSprite([4*48+40, 182, 48, 11]);
+
+  var CRASH_0 = addSprite([0*56+20, 193, 56, 16]);
+  var CRASH_1 = addSprite([1*56+20, 193, 56, 16]);
+  var CRASH_2 = addSprite([2*56+20, 193, 56, 16]);
+  var CRASH_3 = addSprite([3*56+20, 193, 56, 16]);
+  var CRASH_4 = addSprite([4*56+20, 193, 56, 16]);
+
+  var PLAYER_0 = addSprite([0*64, 210, 64, 15]);
+  var PLAYER_1 = addSprite([1*64, 210, 64, 15]);
+  var PLAYER_2 = addSprite([2*64, 210, 64, 15]);
+  var PLAYER_3 = addSprite([3*64, 210, 64, 15]);
+  var PLAYER_4 = addSprite([4*64, 210, 64, 15]);
 
   return {
     clear: clear,
 
     game: [
-      doDraw([[0, 2, 60, 12]]),
-      doDraw([[0, 2+12, 60, 12]])
+      enable([GAME_A]),
+      enable([GAME_B])
     ],
 
-    segment: [digit0to9(0), digit0to9(14), digit0to9(36), digit0to9(50), digit0to9(64)],
+    segment: [
+      [
+        enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_2, SEGMENT_0_5]),
+        enable([SEGMENT_0_0, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_5]),
+        enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_3, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_5, SEGMENT_0_6])
+      ],
+      [
+        enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_2, SEGMENT_1_5]),
+        enable([SEGMENT_1_0, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_5]),
+        enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_3, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_5, SEGMENT_1_6])
+      ],
+      [
+        enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_2, SEGMENT_2_5]),
+        enable([SEGMENT_2_0, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_5]),
+        enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_3, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_5, SEGMENT_2_6])
+      ],
+      [
+        enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_2, SEGMENT_3_5]),
+        enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5]),
+        enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_0_3, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6])
+      ],
+      [
+        enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_2, SEGMENT_4_5]),
+        enable([SEGMENT_4_0, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_5]),
+        enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_3, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_5, SEGMENT_4_6])
+      ]
+    ],
 
-    colon: doDraw([[264, 8, 2, 14]]),
+    colon: enable([COLON]),
 
-    hit: [doDraw(hit(0*49)), doDraw(hit(1*49)), doDraw(hit(2*49)), doDraw(hit(3*49))],
+    hit: [
+      enable([HIT_0]),
+      enable([HIT_1]),
+      enable([HIT_2]),
+      enable([HIT_3]),
+      enable([HIT_4]),
+    ],
 
-    gameover: doDraw([[129, 70, 61, 44]]),
+    gameover: enable([GAME_OVER]),
 
     opponent: [
-      [doDraw(opponent0(0*8)), doDraw(opponent0(1*8)), doDraw(opponent0(2*8)), doDraw(opponent0(3*8)), doDraw(opponent0(4*8))],
-      [doDraw(opponent1(0*16)), doDraw(opponent1(1*16)), doDraw(opponent1(2*16)), doDraw(opponent1(3*16)), doDraw(opponent1(4*16))],
-      [doDraw(opponent2(0*32)), doDraw(opponent2(1*32)), doDraw(opponent2(2*32)), doDraw(opponent2(3*32)), doDraw(opponent2(4*32))],
-      [doDraw(opponent3(0*48)), doDraw(opponent3(1*48)), doDraw(opponent3(2*48)), doDraw(opponent3(3*48)), doDraw(opponent3(4*48))]
+      [
+        enable([OPPONENT_0_0]), 
+        enable([OPPONENT_0_1]), 
+        enable([OPPONENT_0_2]), 
+        enable([OPPONENT_0_3]), 
+        enable([OPPONENT_0_4])
+      ],
+      [
+        enable([OPPONENT_1_0]), 
+        enable([OPPONENT_1_1]), 
+        enable([OPPONENT_1_2]), 
+        enable([OPPONENT_1_3]), 
+        enable([OPPONENT_1_4])
+      ],
+      [
+        enable([OPPONENT_2_0]), 
+        enable([OPPONENT_2_1]), 
+        enable([OPPONENT_2_2]), 
+        enable([OPPONENT_2_3]), 
+        enable([OPPONENT_2_4])
+      ],
+      [
+        enable([OPPONENT_3_0]), 
+        enable([OPPONENT_3_1]), 
+        enable([OPPONENT_3_2]), 
+        enable([OPPONENT_3_3]), 
+        enable([OPPONENT_3_4])
+      ]
     ],
 
-    crash: [doDraw(crash(0*56)), doDraw(crash(1*56)), doDraw(crash(2*56)), doDraw(crash(3*56)), doDraw(crash(4*56))],
+    crash: [
+      enable([CRASH_0]),
+      enable([CRASH_1]),
+      enable([CRASH_2]),
+      enable([CRASH_3]),
+      enable([CRASH_4])
+    ],
 
-    player: [doDraw(player(0*64)), doDraw(player(1*64)), doDraw(player(2*64)), doDraw(player(3*64)), doDraw(player(4*64))]
+    player: [
+      enable([PLAYER_0]),
+      enable([PLAYER_1]),
+      enable([PLAYER_2]),
+      enable([PLAYER_3]),
+      enable([PLAYER_4]),
+    ],
+
+    enabled: enabledSprites,
+    byIndex: byIndex
   };
 }

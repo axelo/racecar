@@ -1,6 +1,6 @@
 function SceneIdle() {
 
-    function update(state, keyb, dt) {
+    function update(state, keyb, sprites, dt) {
       var now = new Date();
       var hh = now.getHours();
       var mm = now.getMinutes();
@@ -50,9 +50,11 @@ function SceneIdle() {
         keyb.setRead(keyb.KEY_RETURN);
         return true;
       }
+
+      updateSprites(state, sprites);
     }
 
-    function draw(state, sprites) {
+    function updateSprites(state, sprites) {
       sprites.clear();
 
       if (state.clock.hh[0]) sprites.segment[0][state.clock.hh[0]]();
@@ -79,7 +81,6 @@ function SceneIdle() {
 
     return {
       id: 'Idle',
-      update: update,
-      draw: draw
+      update: update
     };
 }
