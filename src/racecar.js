@@ -6,9 +6,6 @@ function Racecar() {
 
   var IMAGE_MASK = 'images/mask.png';
 
-  // var GAME_STATE_CRASHED = 4;
-  // var GAME_STATE_GAMEOVER = 5;
-
   var keyb = Keyboard();
   var canvas = Canvas('canvas', SCREEN_WIDTH, SCREEN_HEIGHT);
   var sprites = Sprites();
@@ -16,13 +13,15 @@ function Racecar() {
   var idleScene = SceneIdle();
   var modeSelectionScene = SceneModeSelection();
   var playingScene = ScenePlaying();
-  var crashScene = SceneCrash();
 
   var scene = idleScene;
 
   var state = {
     player: 2,
+    showCrash: false,
     crashed: false,
+    resumePlay: false,
+    gameOver: false,
     crashes: 0,
     mode: 0,
     score: 0,
@@ -64,9 +63,6 @@ function Racecar() {
     function gameLoop() {
       update(1000/60);
       draw();
-
-      //setTimeout(gameLoop, 1000/60);
-      //setTimeout(gameLoop, 200);
       requestAni(gameLoop);
     }
 
@@ -75,8 +71,8 @@ function Racecar() {
 
       if (current === idleScene) next = modeSelectionScene;
       else if (current === modeSelectionScene) next = playingScene;
-      else if (current === playingScene && state.crashed) next = crashScene;
-      else throw { msg: 'Do not know which scene to change too. Current scene is ' + current.id, state: state };
+      else if (current === playingScene) next = idleScene;
+      else throw 'Do not know which scene to change too. Current scene is ' + current.id;
 
       console.log('Changing from state', current.id, 'to', next.id);
       return next;

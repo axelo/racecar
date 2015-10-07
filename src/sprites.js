@@ -13,9 +13,9 @@ function Sprites() {
   }
 
   function enable(spriteIndices) {
-    return function () {
+    return function (clear) {
       spriteIndices.forEach(function (spriteIndex) {
-        enabledSprites[spriteIndex] = true;
+        enabledSprites[spriteIndex] = !clear;
       });
     };
   }
@@ -133,7 +133,7 @@ function Sprites() {
         enable([SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_5]),
         enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_3, SEGMENT_0_5, SEGMENT_0_6]),
         enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
-        enable([SEGMENT_0_0, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
+        enable([SEGMENT_0_0, SEGMENT_0_2, SEGMENT_0_5]),
         enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_4, SEGMENT_0_5, SEGMENT_0_6]),
         enable([SEGMENT_0_0, SEGMENT_0_1, SEGMENT_0_2, SEGMENT_0_3, SEGMENT_0_5, SEGMENT_0_6])
       ],
@@ -145,7 +145,7 @@ function Sprites() {
         enable([SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_5]),
         enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_3, SEGMENT_1_5, SEGMENT_1_6]),
         enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
-        enable([SEGMENT_1_0, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
+        enable([SEGMENT_1_0, SEGMENT_1_2, SEGMENT_1_5]),
         enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_4, SEGMENT_1_5, SEGMENT_1_6]),
         enable([SEGMENT_1_0, SEGMENT_1_1, SEGMENT_1_2, SEGMENT_1_3, SEGMENT_1_5, SEGMENT_1_6])
       ],
@@ -157,7 +157,7 @@ function Sprites() {
         enable([SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_5]),
         enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_3, SEGMENT_2_5, SEGMENT_2_6]),
         enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
-        enable([SEGMENT_2_0, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
+        enable([SEGMENT_2_0, SEGMENT_2_2, SEGMENT_2_5]),
         enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_4, SEGMENT_2_5, SEGMENT_2_6]),
         enable([SEGMENT_2_0, SEGMENT_2_1, SEGMENT_2_2, SEGMENT_2_3, SEGMENT_2_5, SEGMENT_2_6])
       ],
@@ -168,8 +168,8 @@ function Sprites() {
         enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6]),
         enable([SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5]),
         enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6]),
-        enable([SEGMENT_3_0, SEGMENT_0_3, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
-        enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
+        enable([SEGMENT_3_0, SEGMENT_3_2, SEGMENT_3_5]),
         enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_4, SEGMENT_3_5, SEGMENT_3_6]),
         enable([SEGMENT_3_0, SEGMENT_3_1, SEGMENT_3_2, SEGMENT_3_3, SEGMENT_3_5, SEGMENT_3_6])
       ],
@@ -181,7 +181,7 @@ function Sprites() {
         enable([SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_5]),
         enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_3, SEGMENT_4_5, SEGMENT_4_6]),
         enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
-        enable([SEGMENT_4_0, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
+        enable([SEGMENT_4_0, SEGMENT_4_2, SEGMENT_4_5]),
         enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_4, SEGMENT_4_5, SEGMENT_4_6]),
         enable([SEGMENT_4_0, SEGMENT_4_1, SEGMENT_4_2, SEGMENT_4_3, SEGMENT_4_5, SEGMENT_4_6])
       ]

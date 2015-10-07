@@ -46,12 +46,12 @@ function SceneIdle() {
         }
       }
 
+      updateSprites(state, sprites);
+
       if (keyb.isPressed(keyb.KEY_RETURN)) {
         keyb.setRead(keyb.KEY_RETURN);
         return true;
       }
-
-      updateSprites(state, sprites);
     }
 
     function updateSprites(state, sprites) {
