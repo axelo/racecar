@@ -129,7 +129,7 @@ function ScenePlaying() {
       }
 
       if (state.player !== prevPlayer) {
-        sound.play(400, 0, 0.02);
+        sound.play(400, 0, 0.05);
       }
     }
 
@@ -191,7 +191,7 @@ function ScenePlaying() {
           state.opponents[j] = (newRow >>> j) & 1;
         }
 
-        sound.play(312, 0, 0.02);
+        sound.play(312, 0, 0.05);
       }
     }
   }

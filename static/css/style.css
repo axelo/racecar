@@ -1,20 +1,73 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 body {
-  background-color: #333;
+  width: 320px;
+  margin: 0 auto;
+  background-color: #222;
+  font-family: monospace;
+  cursor: default;
+}
+
+#container {
+  background-color: #444;
+  color: #eee;
+  padding: 10px 0;
 }
 
 #canvas {
-  /*background-color: #fff;*/
-  /*background-color: #86acbb;*/
+  display: block;
 
-
-  image-rendering: pixelated;
-  /*image-rendering: crisp-edges;*/
-  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  
+  image-rendering: -moz-crisp-edges;
+  
   -ms-interpolation-mode: nearest-neighbor;
+}
+
+#title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+  padding: 2px 0;
+  color: #eee;
+}
+
+#steering {
+  position: relative;
+  height: 128px;
+  white-space: nowrap;
+}
+
+.steer {
+  position: absolute;
+  top: 35px;
+  height: 0;
+  width: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+}
+
+.steer.left {
+  left: 40px;
+  border-right: 50px solid #ddd;
+}
+
+.steer.right {
+  right: 40px;
+  border-left: 50px solid #ddd;
+}
+
+#start {
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 24px;
+  text-align: center;
+  background-color: #383838;
 }
