@@ -1,7 +1,7 @@
 function SceneModeSelection() {
   'use strict';
 
-  function update(state, keyb, sprites, dt) {
+  function update(state, keyb, sound, sprites, dt) {
 
     for (var i = 0; i < state.opponents.length; ++i) {
       state.opponents[i] = 0;

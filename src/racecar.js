@@ -7,6 +7,8 @@ function Racecar() {
   var IMAGE_MASK = 'images/mask.png';
 
   var keyb = Keyboard();
+  var sound = Sound();
+
   var canvas = Canvas('canvas', SCREEN_WIDTH, SCREEN_HEIGHT);
   var sprites = Sprites();
 
@@ -19,6 +21,7 @@ function Racecar() {
   var state = {
     player: 2,
     showCrash: false,
+    crashSoundDone: false,
     crashed: false,
     resumePlay: false,
     gameOver: false,
@@ -79,7 +82,7 @@ function Racecar() {
     }
 
     function update(dt) {
-      var finished = scene.update(state, keyb, sprites, dt);
+      var finished = scene.update(state, keyb, sound, sprites, dt);
 
       if (finished) scene = nextScene(scene);
     }
