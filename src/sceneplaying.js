@@ -1,7 +1,7 @@
 function ScenePlaying() {
   'use strict';
 
-  var inputLagFrameTime = 180;
+  var inputLagFrameTime = 160;
   var deltaInputLagFrameTime = 200;
 
   var minFrameTime = 400;
@@ -94,6 +94,10 @@ function ScenePlaying() {
         state.resumePlay = false;
       }
     }
+    else if (keyb.isPressed(keyb.KEY_RETURN)) {
+      keyb.setRead(keyb.KEY_RETURN);
+      state.resumePlay = false;
+    }
   }
 
   function updateCrash(state, keyb, sound, sprites, dt) {
@@ -137,18 +141,18 @@ function ScenePlaying() {
       deltaTime = 0;
 
       // Check coll
-      var opponentOnLastRow = false;
+      var opponentsOnLastRow = 0;
       var collision = false;
 
       for (var k = state.opponents.length - 5; k < state.opponents.length; ++k) {
         if (state.opponents[k] === 1) {
-          opponentOnLastRow = true;
+          ++opponentsOnLastRow;
           if (state.player === (k % 5)) collision = true;
         }
       }
 
-      if (opponentOnLastRow && !collision) {
-        ++state.score;
+      if (opponentsOnLastRow > 0 && !collision) {
+        state.score += opponentsOnLastRow;
 
         if ((state.score % 10) === 0) {
           frameTime -= 20;
@@ -172,7 +176,7 @@ function ScenePlaying() {
 
         var notes = state.gameOver 
           ? [530, 0, 0.4, 500, 0.1, 0.4, 490, 0.1, 0.4, 480, 0.1, 0.4, 470, 0.1, 0.4, 460, 0.1, 0.4, 440, 0.1, 0.4]
-          : [530, 0, 0.3, 300, 0.1, 0.3, 400, 0.1, 0.5];
+          : [530, 0, 0.3, 300, 0.1, 0.3, 400, 0.1, 0.5, 0, 0.1, 0.2];
 
         sound.playNotes(notes, function () {
           state.crashSoundDone = true;

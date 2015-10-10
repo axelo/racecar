@@ -53,6 +53,7 @@ function SceneIdle() {
       keyb.setRead(keyb.KEY_RETURN);
 
       state.crashed = false;
+      state.mode = 0;
 
       return true;
     }

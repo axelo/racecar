@@ -1,7 +1,11 @@
 function SceneModeSelection() {
   'use strict';
 
+  var timeUntilAutoSelect = 2000;
+  var deltaTime = 0;
+
   function update(state, keyb, sound, sprites, dt) {
+    deltaTime += dt;
 
     for (var i = 0; i < state.opponents.length; ++i) {
       state.opponents[i] = 0;
@@ -16,7 +20,7 @@ function SceneModeSelection() {
 
     updateSprites(state, sprites);
 
-    if (keyb.isPressed(keyb.KEY_RETURN)) {
+    if (keyb.isPressed(keyb.KEY_RETURN) || deltaTime >= timeUntilAutoSelect) {
       keyb.setRead(keyb.KEY_RETURN);
       return true;
     }
