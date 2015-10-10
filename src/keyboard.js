@@ -3,39 +3,67 @@ function Keyboard() {
 
   var keyDownMap = [];
   var keyUpMap = [];
+  var keyUnreadMap = [];
 
   var IS_READ = 2;
 
-  window.onkeydown = function (event) {
-    keyUpMap[event.which] = false;
+  window.addEventListener('keydown', function (event) {
+    onKeydown(event.which);
+  }, false);
 
-    if (keyDownMap[event.which] !== IS_READ) keyDownMap[event.which] = true;
+  window.addEventListener('keyup', function (event) {
+    onKeyup(event.which);
+  });
+
+  function onKeydown(which) {
+    keyUpMap[which] = false;
+    keyDownMap[which] = true;
+
+    if (keyUnreadMap[which] !== IS_READ) keyUnreadMap[which] = true;
   }
 
-  window.onkeyup = function (event) {
-     keyUpMap[event.which] = true;
+  function onKeyup(which) {
+     keyUpMap[which] = true;
+     keyDownMap[which] = false;
 
-    if (keyDownMap[event.which] === IS_READ) keyDownMap[event.which] = false;
+    if (keyUnreadMap[which] === IS_READ) keyUnreadMap[which] = false;
   }
 
   function isPressed(which) {
+    return keyUnreadMap[which] === true;
+  }
+
+  function isPressedNow(which) {
     return keyDownMap[which] === true;
   }
 
   function setRead(which) {
-    keyDownMap[which] = IS_READ;
+    keyUnreadMap[which] = IS_READ;
 
-    if (keyUpMap[which] === true) keyDownMap[which] = false;
+    if (keyUpMap[which] === true) keyUnreadMap[which] = false;
   }
 
   function clear() {
-    for (var i = 0; i < keyDownMap.length; ++i) keyDownMap[i] = false;
+    for (var i = 0; i < keyUnreadMap.length; ++i) keyUnreadMap[i] = false;
+  }
+
+  function setPressed(which) {
+    onKeydown(which);
+  }
+
+  function setUnpressed(which) {
+    onKeyup(which);
   }
 
   return {
     isPressed: isPressed, 
+    isPressedNow: isPressedNow,
+
     setRead: setRead,
     clear: clear,
+
+    setPressed: setPressed,
+    setUnpressed: setUnpressed,
 
     KEY_LEFT: 37,
     KEY_RIGHT: 39,

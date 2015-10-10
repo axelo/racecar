@@ -8,6 +8,7 @@ function Racecar() {
 
   var keyb = Keyboard();
   var sound = Sound();
+  var hud = Hud(keyb, 'steering', 'steer-left', 'steer-right', 'start');
 
   var canvas = Canvas('canvas', SCREEN_WIDTH, SCREEN_HEIGHT);
   var sprites = Sprites();
@@ -82,6 +83,8 @@ function Racecar() {
     }
 
     function update(dt) {
+      hud.update();
+
       var finished = scene.update(state, keyb, sound, sprites, dt);
 
       if (finished) scene = nextScene(scene);

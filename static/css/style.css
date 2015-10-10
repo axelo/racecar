@@ -58,16 +58,46 @@ body {
   border-right: 50px solid #ddd;
 }
 
+.steer.left.pressed {
+  transform: translate(2px, 4px);
+  border-right-color: #ccc;
+}
+
 .steer.right {
   right: 40px;
   border-left: 50px solid #ddd;
 }
 
+.steer.right.pressed {
+  transform: translate(-2px, 4px);
+  border-left-color: #ccc;
+}
+
 #start {
   width: 300px;
+  height: 40px;
+  line-height: 40px;
   margin: 0 auto;
-  padding: 10px 0;
   font-size: 24px;
   text-align: center;
   background-color: #383838;
+}
+
+#start :first-child {
+  display: block;
+}
+
+#start.pressed :first-child {
+  transform: translate(1px, 2px);
+  background-color: #333333;
+}
+
+.noselect {
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
