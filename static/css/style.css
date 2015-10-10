@@ -14,7 +14,8 @@ body {
 
 #container {
   color: #eee;
-  padding: 10px 0;
+  height: 460px;
+  overflow: hidden;
 }
 
 #canvas {
@@ -31,11 +32,9 @@ body {
 
 #title {
   text-align: center;
-  font-size: 32px;
-  height: 40px;
-  line-height: 40px;
-  margin-bottom: 10px;
-  padding: 2px 0;
+  font-size: 36px;
+  height: 60px;
+  line-height: 60px;
   color: #eee;
   font-family: 'Monoton', cursive;
 }
@@ -43,7 +42,7 @@ body {
 #steering {
   position: relative;
   height: 128px;
-  margin-top: 15px;
+  /*margin-top: 15px;*/
 }
 
 .steer {
@@ -76,11 +75,11 @@ body {
 }
 
 #start {
-  width: 120px;
-  height: 40px;
-  line-height: 40px;
+  width: 110px;
+  height: 26px;
+  line-height: 26px;
   margin: 0 auto;
-  margin-top: 24px;
+  margin-top: 4px;
   font-size: 20px;
   font-family: 'Bangers';
   text-align: center;
