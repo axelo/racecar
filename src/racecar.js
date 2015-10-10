@@ -62,6 +62,8 @@ function Racecar() {
   function startGame(resourceMap) {
     console.log('Starting the game!');
 
+    sound.playOnceOnClick('start', 440, 0, 0); // Make iOS play sounds for us
+
     gameLoop();
 
     function gameLoop() {

@@ -6,7 +6,44 @@ function Hud(keyb, steeringId, leftId, rightId, startId) {
   var rightEl = document.getElementById(rightId);
   var startEl = document.getElementById(startId);
 
+  var gotSteeringTouchStart = false;
+  var gotStartTouchStart = false;
+
+  steering.addEventListener('touchstart', function (event) {
+    gotSteeringTouchStart = true;
+    mapHudEventToKeyboard(event);
+  }, false);
+
   steering.addEventListener('mousedown', function (event) {
+    if (!gotSteeringTouchStart) mapHudEventToKeyboard(event);
+    gotSteeringTouchStart = false;
+  }, false);
+
+  startEl.addEventListener('touchstart', function (event) {
+    gotStartTouchStart = true;
+    keyb.setPressed(keyb.KEY_RETURN);
+  }, false);
+
+  startEl.addEventListener('mousedown', function (event) {
+    if (!gotStartTouchStart) keyb.setPressed(keyb.KEY_RETURN);
+    gotStartTouchStart = false;
+  }, false);
+
+  window.addEventListener('touchend', function (event) {
+    clear();
+  }, false);
+
+  window.addEventListener('mouseup', function (event) {
+    clear();
+  }, false);
+
+  function clear() {
+    keyb.setUnpressed(keyb.KEY_LEFT);
+    keyb.setUnpressed(keyb.KEY_RIGHT);
+    keyb.setUnpressed(keyb.KEY_RETURN);
+  }
+
+  function mapHudEventToKeyboard(event) {
     if (event.target === leftEl) return keyb.setPressed(keyb.KEY_LEFT);
     if (event.target === rightEl) return keyb.setPressed(keyb.KEY_RIGHT);
 
@@ -15,17 +52,7 @@ function Hud(keyb, steeringId, leftId, rightId, startId) {
 
     if (event.layerX < (half - dmz)) keyb.setPressed(keyb.KEY_LEFT);
     if (event.layerX > (half + dmz)) keyb.setPressed(keyb.KEY_RIGHT);
-  }, false);
-
-  startEl.addEventListener('mousedown', function (event) {
-    keyb.setPressed(keyb.KEY_RETURN);
-  }, false);
-
-  window.addEventListener('mouseup', function (event) {
-    keyb.setUnpressed(keyb.KEY_LEFT);
-    keyb.setUnpressed(keyb.KEY_RIGHT);
-    keyb.setUnpressed(keyb.KEY_RETURN);
-  }, false);
+  }
 
   function update() {
     if (keyb.isPressedNow(keyb.KEY_LEFT)) leftEl.classList.add('pressed');

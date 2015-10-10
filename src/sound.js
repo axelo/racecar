@@ -1,12 +1,12 @@
 function Sound() {
   'use strict';
 
-  var audioCtx = new window.AudioContext();
+  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var gainNode = audioCtx.createGain();
   // var distortion = audioCtx.createWaveShaper();
 
   gainNode.connect(audioCtx.destination); // connecting the different audio graph nodes together
-  gainNode.gain.value = 0.1;
+  gainNode.gain.value = 0.2;
 
   function play(hz, delay, length, onended) {
     var osc = audioCtx.createOscillator();
@@ -41,11 +41,23 @@ function Sound() {
       aggregatedDelay += delay + length;
     }
 
-    if (lastNode && onended) lastNode.onended = onended;
+    if (lastNode && onended) window.setTimeout(onended, aggregatedDelay * 1000);
+  }
+
+  function playOnceOnClick(elId, hz, delay, length) {
+    var el = document.getElementById(elId);
+
+    el.addEventListener('click', doIt, false);
+
+    function doIt() {
+      el.removeEventListener('click', doIt, false);
+      play(hz, delay, length);
+    }
   }
 
   return {
     play: play,
-    playNotes: playNotes
+    playNotes: playNotes,
+    playOnceOnClick: playOnceOnClick
   }
 }
