@@ -3,19 +3,18 @@ function Sound() {
 
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var gainNode = audioCtx.createGain();
-  // var distortion = audioCtx.createWaveShaper();
 
   gainNode.connect(audioCtx.destination); // connecting the different audio graph nodes together
   gainNode.gain.value = 0.2;
 
-  function play(hz, delay, length, onended) {
+  function play(hz, delay, length) {
     var osc = audioCtx.createOscillator();
     osc.type = 'square';
     osc.frequency.value = hz;
 
     var filter = audioCtx.createBiquadFilter();
     filter.frequency.value = hz; // in Hertz
-    filter.type = "notch"; // 0
+    filter.type = 'notch';
 
     osc.connect(filter);
     filter.connect(gainNode);
@@ -23,7 +22,6 @@ function Sound() {
     osc.start(audioCtx.currentTime + delay);
     osc.stop(audioCtx.currentTime + delay + length);
 
-    if (onended) osc.onended = onended;
     return osc;
   }
 
@@ -41,12 +39,11 @@ function Sound() {
       aggregatedDelay += delay + length;
     }
 
-    if (lastNode && onended) window.setTimeout(onended, aggregatedDelay * 1000);
+    if (lastNode && onended) window.setTimeout(onended, aggregatedDelay * 1000 + 16);
   }
 
   function playOnceOnClick(elId, hz, delay, length) {
     var el = document.getElementById(elId);
-
     el.addEventListener('click', doIt, false);
 
     function doIt() {
