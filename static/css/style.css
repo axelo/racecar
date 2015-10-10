@@ -20,6 +20,8 @@ body {
 
 #canvas {
   display: block;
+  width: 320px;
+  height: 240px;
 
   image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
@@ -36,7 +38,7 @@ body {
   height: 60px;
   line-height: 60px;
   color: #eee;
-  font-family: 'Monoton', cursive;
+  font-family: 'Monoton';
 }
 
 #steering {
