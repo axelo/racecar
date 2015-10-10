@@ -5,7 +5,7 @@ function Sound() {
   var gainNode = audioCtx.createGain();
 
   gainNode.connect(audioCtx.destination); // connecting the different audio graph nodes together
-  gainNode.gain.value = 0.2;
+  gainNode.gain.value = 0.1;
 
   function play(hz, delay, length) {
     var osc = audioCtx.createOscillator();
